@@ -1,0 +1,84 @@
+// Laba 9.cpp : Defines the entry point for the console application.
+//
+#include "stdafx.h"
+#include "Factory.h"
+
+
+void main()
+{
+	setlocale(LC_CTYPE, "Ukrainian");
+	while (1)
+	{
+		system("cls");
+		cout << " Меню\n" << endl;
+		cout << "1. Ввести данi з клавiатури." << endl;
+		cout << "2. Вивести данi." << endl;
+		cout << "3. Завдання1." << endl;
+		cout << "4. Завдання2" << endl;
+		cout << "5. Завдання3" << endl;
+		cout << "6. Видалити все" << endl;
+		cout << "7. Додати данi" << endl;
+		cout << "8. Вихiд\n9. Изменить\n" << endl;
+
+		cout << endl;
+
+		int key;								//номер пункту меню
+		cout << "Виберiть пункт меню:";
+		cin >> key;							//вибір потрібного пункту меню
+		switch (key)							//вибір функції реалізації меню
+		{
+		case 1: { input();	break; }			//введення даних
+
+		case 2:								//виведення даних з масиву на екран
+		{
+			read_from_file_w();
+			read_from_file_s();
+			break; 
+		}
+
+		case 3: 
+		{ 
+			double salar;
+			cout << "Введіть зарплату" << endl;
+			cin >> salar;
+			Task1(salar);
+			_getch();
+			break; 
+		}					//Task1
+
+		case 4:								//task2
+		{
+			char speciality[15];
+			int count;
+			cout << " Введiть фах\n";
+			cin >> speciality;
+			count = Task2(speciality);
+			cout << " Кiлькiсть персоналу з фахом " << speciality << " та рiвнем 1: " << count << endl;
+			_getch();
+			break; }
+
+		case 5: { Task3(); break; }					//Task3
+
+		case 6:
+		{
+				  remove("workers.dat");
+				  FILE*fw;
+				  fopen_s(&fw,"workers.dat", "wb");
+				  fclose(fw);
+				  remove("staffs.dat");
+				  FILE*fs;
+				  fopen_s(&fs,"staffs.dat", "wb");
+				  fclose(fs);
+				  break;
+		}
+		case 7: { Add(); break; }
+
+		case 8: { /*remove("workers.dat"); remove("staffs.dat");*/ exit(0); break; } //вихід з програми
+		case 9: { Changed(); break; }
+
+		default: {cout << "Try another time..."; _getch(); break; }
+
+		}
+	}
+	system("pause");
+}
